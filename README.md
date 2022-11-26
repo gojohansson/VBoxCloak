@@ -30,7 +30,7 @@ Make registry changes, remove VBox files, and kill VBox processes:
   
   - "VBoxCloak.ps1 -all"
   
-Just make registry modificaitons:
+Just make registry modifications:
   
   - "VBoxCloak.ps1 -reg"
   
@@ -42,9 +42,13 @@ Just kill VBox processes:
   
   - "VBoxCloak.ps1 -procs"
 
+Just change computer name and user account:
+
+  - "VBoxCloak.ps1 -name"
+
 # Warnings & Disclaimers
 
-- This code is in Beta. I know I cuold have coded it better, but sometimes quick and dirty is best.
+- This code is in Beta. I know I could have coded it better, but sometimes quick and dirty is best.
 - Use at your own risk! Use only in a VM, and NOT on your host.
 - Ensure to make a snapshot of your VM before running this.
 - Using the "files" and/or "procs" command line arguments will likely result in lower VM performance. This is because this script removes several files that are required for supporting functions such as graphics, keyboard input, etc. Just revert VM to clean state if this messes anything up.
