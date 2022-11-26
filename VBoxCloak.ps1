@@ -113,8 +113,11 @@ if ($name)
 
 	#Rename-LocalUser -Name $env:UserName -NewName $( Get-RandomUsername )
 
-	$currentUser = $( ((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty username)) )
-	$currentUser.Rename($( Get-RandomUsername ))
+	$randomName = $( Get-RandomUsername )
+	$currentUser = $( ((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty username)) ).Split('\')[1]
+	Write-Host "Current user: $currentUser"
+	Write-Host "New name: $randomName"
+	$currentUser.rename($randomName)
 }
 
 # Modify VBox registry keys
