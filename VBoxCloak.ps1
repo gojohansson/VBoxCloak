@@ -113,8 +113,8 @@ if ($name)
 
 	#Rename-LocalUser -Name $env:UserName -NewName $( Get-RandomUsername )
 
-	$myAccount = Get-CimInstance Win32_UserAccount -Filter "name=$env:UserName"
-	Invoke-CimMethod -InputObject $myAccount -MethodName Rename -Arguments @{ Name = $( Get-RandomUsername ) }
+	$currentUser = $( ((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty username)) )
+	$currentUser.Rename($( Get-RandomUsername ))
 }
 
 # Modify VBox registry keys
