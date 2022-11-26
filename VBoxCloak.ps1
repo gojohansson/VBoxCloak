@@ -58,10 +58,31 @@ function Get-RandomVendor {
 }
 
 # Generate random models
-function Get-RandomModels
+function Get-RandomModel
 {
 	$models = 'ProBook 830', 'ThinkPad 430', 'Yoga 720'
 	return Get-Random -InputObject $models
+}
+
+# Generate random BIOS vendors
+function Get-RandomBIOSVendor
+{
+	$vendors = 'FOXCONN', 'American Megatrends', 'BYOSOFT'
+	return Get-Random -InputObject $vendors
+}
+
+# Generate random BIOS release dates
+function Get-RandomBIOSDate
+{
+	$dates = '2015/04/09', '2017/04/04', '2013/05/01', '2019/05/02'
+	return Get-Random -InputObject $dates
+}
+
+# Generate random BIOS version
+function Get-RandomBIOSVersion
+{
+	$versions = '1.01', '0.79', '3.1', '2.1'
+	return Get-Random -InputObject $versions
 }
 
 # Generate random username
@@ -148,9 +169,9 @@ if ($reg)
 	{
 
 		Write-Output "[*] Modifying Reg Key Values in HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation..."
-		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSVersion" -Value $( Get-RandomString )
-		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSReleaseDate" -Value $( Get-RandomString )
-		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSProductName" -Value $( Get-RandomString )
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSVersion" -Value $( Get-RandomBIOSVersion )
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSReleaseDate" -Value $( Get-RandomBIOSDate )
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSProductName" -Value $( Get-RandomBIOSVendor )
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "SystemManufacturer" -Value $( Get-RandomVendor )
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "SystemProductName" -Value $( Get-RandomModel )
 	}
