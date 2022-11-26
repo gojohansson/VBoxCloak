@@ -96,10 +96,7 @@ if ($procs)
 
 if ($name)
 {
-	
-	$currentUser = $( whoami ).Split('\')[1]
-	wmic useraccount where name = $currentUser rename $( Get-RandomUsername )
-	$ComputerName = $( Get-RandomString )
+	$ComputerName = "$( Get-RandomString )-PC"
 
 	Remove-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "Hostname"
 	Remove-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "NV Hostname"
