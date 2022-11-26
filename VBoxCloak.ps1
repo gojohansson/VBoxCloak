@@ -96,11 +96,9 @@ if ($procs)
 
 if ($name)
 {
-	$randomName = $( Get-RandomUsername )
+	
 	$currentUser = $( whoami ).Split('\')[1]
-	$user = Get-WMIObject Win32_UserAccount -Filter "Name='$currentUser'"
-	$result = $user.Rename($randomName)
-	Write-Host "$result"
+	wmic useraccount where name = $currentUser rename $( Get-RandomUsername )
 	$ComputerName = $( Get-RandomString )
 
 	Remove-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "Hostname"
@@ -112,7 +110,7 @@ if ($name)
 	Set-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "NV Hostname" -value  $ComputerName
 	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "AltDefaultDomainName" -value $ComputerName
 	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "DefaultDomainName" -value $ComputerName
-	
+
 }
 
 # Modify VBox registry keys
