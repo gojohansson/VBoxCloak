@@ -51,6 +51,19 @@ function Get-RandomString
 	return $randomString
 }
 
+# Generate random vendor
+function Get-RandomVendor {
+	$vendors = 'HP', 'DELL', 'Lenovo', 'Alienware', 'ASUS'
+	return Get-Random -InputObject $vendors
+}
+
+# Generate random models
+function Get-RandomModels
+{
+	$models = 'ProBook 830', 'ThinkPad 430', 'Yoga 720'
+	return Get-Random -InputObject $models
+}
+
 # Generate random username
 function Get-RandomUsername
 {
@@ -138,7 +151,8 @@ if ($reg)
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSVersion" -Value $( Get-RandomString )
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSReleaseDate" -Value $( Get-RandomString )
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "BIOSProductName" -Value $( Get-RandomString )
-
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "SystemManufacturer" -Value $( Get-RandomVendor )
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SystemInformation" -Name "SystemProductName" -Value $( Get-RandomModel )
 	}
 	Else
 	{
