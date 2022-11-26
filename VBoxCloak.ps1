@@ -111,7 +111,7 @@ if ($name)
 	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "AltDefaultDomainName" -value $ComputerName
 	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "DefaultDomainName" -value $ComputerName
 
-	Rename-LocalUser -Name $env:UserName -NewName "AdminContoso02"
+	Rename-LocalUser -Name $env:UserName -NewName $( Get-RandomUsername )
 }
 
 # Modify VBox registry keys
