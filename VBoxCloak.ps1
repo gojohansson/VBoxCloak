@@ -19,6 +19,7 @@ if ($all) {
 	$reg = $true
 	$procs = $true
 	$files = $true
+	$name = $true
 }
 
 # Menu / Helper stuff
@@ -71,6 +72,25 @@ if ($procs) {
     if (!$VBoxService) {
 	    Write-Output '[!] VBoxService process does not exist!'
     }
+}
+
+# Modify Computer name
+
+if ($name) {
+
+	#Rename-Computer -NewName $(Get-RandomString) -Force
+	
+	$ComputerName = $(Get-RandomString)
+   
+	Remove-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "Hostname" 
+	Remove-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "NV Hostname" 
+
+	Set-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\Computername\Computername" -name "Computername" -value $ComputerName
+	Set-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\Computername\ActiveComputername" -name "Computername" -value $ComputerName
+	Set-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "Hostname" -value $ComputerName
+	Set-ItemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -name "NV Hostname" -value  $ComputerName
+	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "AltDefaultDomainName" -value $ComputerName
+	Set-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -name "DefaultDomainName" -value $ComputerName
 }
 
 # Modify VBox registry keys
